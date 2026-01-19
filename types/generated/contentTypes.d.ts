@@ -467,12 +467,13 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
-  collectionName: 'categories';
+export interface ApiConsultationConsultation
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'consultations';
   info: {
-    displayName: 'Category';
-    pluralName: 'categories';
-    singularName: 'category';
+    displayName: 'Consultation';
+    pluralName: 'consultations';
+    singularName: 'consultation';
   };
   options: {
     draftAndPublish: true;
@@ -481,19 +482,18 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::category.category'
+      'api::consultation.consultation'
     > &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    position: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
-    restaurants: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::restaurant.restaurant'
+    therapeute: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::therapeute.therapeute'
     >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -501,38 +501,125 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiRestaurantRestaurant extends Struct.CollectionTypeSchema {
-  collectionName: 'restaurants';
+export interface ApiSoinSoin extends Struct.CollectionTypeSchema {
+  collectionName: 'soins';
   info: {
-    displayName: 'Restaurant';
-    pluralName: 'restaurants';
-    singularName: 'restaurant';
+    displayName: 'Soin';
+    pluralName: 'soins';
+    singularName: 'soin';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    categories: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::category.category'
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::soin.soin'> &
+      Schema.Attribute.Private;
+    position: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    therapeute: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::therapeute.therapeute'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTarifTarif extends Struct.CollectionTypeSchema {
+  collectionName: 'tarifs';
+  info: {
+    displayName: 'Tarif';
+    pluralName: 'tarifs';
+    singularName: 'tarif';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::tarif.tarif'> &
+      Schema.Attribute.Private;
+    position: Schema.Attribute.Integer;
+    prix: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    therapeute: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::therapeute.therapeute'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTherapeuteTherapeute extends Struct.CollectionTypeSchema {
+  collectionName: 'therapeutes';
+  info: {
+    displayName: 'Therapeute';
+    pluralName: 'therapeutes';
+    singularName: 'therapeute';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    actif: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    consultations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::consultation.consultation'
+    >;
+    couleur: Schema.Attribute.Enumeration<
+      [
+        'violet',
+        'darkTurquoise',
+        'banane',
+        'coral',
+        'darkcyan',
+        'crimson',
+        'rebeccapurple',
+        'lavande',
+        'bleuPaon',
+        'framboise',
+      ]
     >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.Blocks;
+    imageConsultation: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    imageSoin: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::restaurant.restaurant'
+      'api::therapeute.therapeute'
     > &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    mail: Schema.Attribute.Email;
+    metaDescription: Schema.Attribute.String;
+    nom: Schema.Attribute.String;
+    photo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    portable: Schema.Attribute.String;
+    prenom: Schema.Attribute.String;
+    presentation: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
+    soins: Schema.Attribute.Relation<'oneToMany', 'api::soin.soin'>;
+    specialites: Schema.Attribute.String;
+    tarifs: Schema.Attribute.Relation<'oneToMany', 'api::tarif.tarif'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    url: Schema.Attribute.String;
   };
 }
 
@@ -1047,8 +1134,10 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::category.category': ApiCategoryCategory;
-      'api::restaurant.restaurant': ApiRestaurantRestaurant;
+      'api::consultation.consultation': ApiConsultationConsultation;
+      'api::soin.soin': ApiSoinSoin;
+      'api::tarif.tarif': ApiTarifTarif;
+      'api::therapeute.therapeute': ApiTherapeuteTherapeute;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

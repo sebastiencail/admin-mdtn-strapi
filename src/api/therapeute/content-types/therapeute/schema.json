@@ -1,0 +1,106 @@
+{
+  "kind": "collectionType",
+  "collectionName": "therapeutes",
+  "info": {
+    "singularName": "therapeute",
+    "pluralName": "therapeutes",
+    "displayName": "Therapeute"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "actif": {
+      "type": "boolean",
+      "default": false
+    },
+    "nom": {
+      "type": "string"
+    },
+    "couleur": {
+      "type": "enumeration",
+      "enum": [
+        "violet",
+        "darkTurquoise",
+        "banane",
+        "coral",
+        "darkcyan",
+        "crimson",
+        "rebeccapurple",
+        "lavande",
+        "bleuPaon",
+        "framboise"
+      ]
+    },
+    "prenom": {
+      "type": "string"
+    },
+    "specialites": {
+      "type": "string"
+    },
+    "portable": {
+      "type": "string"
+    },
+    "presentation": {
+      "type": "text"
+    },
+    "mail": {
+      "type": "email"
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "url": {
+      "type": "string"
+    },
+    "metaDescription": {
+      "type": "string"
+    },
+    "tarifs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tarif.tarif",
+      "mappedBy": "therapeute"
+    },
+    "consultations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::consultation.consultation",
+      "mappedBy": "therapeute"
+    },
+    "soins": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::soin.soin",
+      "mappedBy": "therapeute"
+    },
+    "imageConsultation": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "imageSoin": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

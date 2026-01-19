@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "soins",
+  "info": {
+    "singularName": "soin",
+    "pluralName": "soins",
+    "displayName": "Soin"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "position": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "string"
+    },
+    "therapeute": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::therapeute.therapeute",
+      "inversedBy": "soins"
+    }
+  }
+}

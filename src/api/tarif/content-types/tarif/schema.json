@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tarifs",
+  "info": {
+    "singularName": "tarif",
+    "pluralName": "tarifs",
+    "displayName": "Tarif"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "position": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "string"
+    },
+    "prix": {
+      "type": "string"
+    },
+    "therapeute": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::therapeute.therapeute",
+      "inversedBy": "tarifs"
+    }
+  }
+}
