@@ -467,101 +467,6 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiConsultationConsultation
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'consultations';
-  info: {
-    displayName: 'Consultation';
-    pluralName: 'consultations';
-    singularName: 'consultation';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::consultation.consultation'
-    > &
-      Schema.Attribute.Private;
-    position: Schema.Attribute.Integer;
-    publishedAt: Schema.Attribute.DateTime;
-    therapeute: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::therapeute.therapeute'
-    >;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiSoinSoin extends Struct.CollectionTypeSchema {
-  collectionName: 'soins';
-  info: {
-    displayName: 'Soin';
-    pluralName: 'soins';
-    singularName: 'soin';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::soin.soin'> &
-      Schema.Attribute.Private;
-    position: Schema.Attribute.Integer;
-    publishedAt: Schema.Attribute.DateTime;
-    therapeute: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::therapeute.therapeute'
-    >;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiTarifTarif extends Struct.CollectionTypeSchema {
-  collectionName: 'tarifs';
-  info: {
-    displayName: 'Tarif';
-    pluralName: 'tarifs';
-    singularName: 'tarif';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::tarif.tarif'> &
-      Schema.Attribute.Private;
-    position: Schema.Attribute.Integer;
-    prix: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    therapeute: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::therapeute.therapeute'
-    >;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiTherapeuteTherapeute extends Struct.CollectionTypeSchema {
   collectionName: 'therapeutes';
   info: {
@@ -574,10 +479,7 @@ export interface ApiTherapeuteTherapeute extends Struct.CollectionTypeSchema {
   };
   attributes: {
     actif: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    consultations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::consultation.consultation'
-    >;
+    consultations: Schema.Attribute.Component<'divers.information', true>;
     couleur: Schema.Attribute.Enumeration<
       [
         'violet',
@@ -613,9 +515,9 @@ export interface ApiTherapeuteTherapeute extends Struct.CollectionTypeSchema {
     prenom: Schema.Attribute.String;
     presentation: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
-    soins: Schema.Attribute.Relation<'oneToMany', 'api::soin.soin'>;
+    soins: Schema.Attribute.Component<'divers.information', true>;
     specialites: Schema.Attribute.String;
-    tarifs: Schema.Attribute.Relation<'oneToMany', 'api::tarif.tarif'>;
+    tarifs: Schema.Attribute.Component<'divers.tarif', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1134,9 +1036,6 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::consultation.consultation': ApiConsultationConsultation;
-      'api::soin.soin': ApiSoinSoin;
-      'api::tarif.tarif': ApiTarifTarif;
       'api::therapeute.therapeute': ApiTherapeuteTherapeute;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

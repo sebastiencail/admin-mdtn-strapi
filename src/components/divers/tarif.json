@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_divers_tarifs",
+  "info": {
+    "displayName": "tarif"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "string"
+    },
+    "prix": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

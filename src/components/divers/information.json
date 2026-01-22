@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_divers_information",
+  "info": {
+    "displayName": "information"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

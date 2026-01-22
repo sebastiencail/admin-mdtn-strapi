@@ -18,6 +18,9 @@
     "nom": {
       "type": "string"
     },
+    "prenom": {
+      "type": "string"
+    },
     "couleur": {
       "type": "enumeration",
       "enum": [
@@ -32,9 +35,6 @@
         "bleuPaon",
         "framboise"
       ]
-    },
-    "prenom": {
-      "type": "string"
     },
     "specialites": {
       "type": "string"
@@ -65,22 +65,9 @@
       "type": "string"
     },
     "tarifs": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::tarif.tarif",
-      "mappedBy": "therapeute"
-    },
-    "consultations": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::consultation.consultation",
-      "mappedBy": "therapeute"
-    },
-    "soins": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::soin.soin",
-      "mappedBy": "therapeute"
+      "type": "component",
+      "component": "divers.tarif",
+      "repeatable": true
     },
     "imageConsultation": {
       "type": "media",
@@ -92,6 +79,11 @@
         "audios"
       ]
     },
+    "consultations": {
+      "type": "component",
+      "component": "divers.information",
+      "repeatable": true
+    },
     "imageSoin": {
       "type": "media",
       "multiple": false,
@@ -101,6 +93,11 @@
         "videos",
         "audios"
       ]
+    },
+    "soins": {
+      "type": "component",
+      "component": "divers.information",
+      "repeatable": true
     }
   }
 }
