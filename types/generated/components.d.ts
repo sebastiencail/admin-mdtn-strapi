@@ -6,7 +6,7 @@ export interface DiversInformation extends Struct.ComponentSchema {
     displayName: 'information';
   };
   attributes: {
-    description: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
   };
 }
 
@@ -16,7 +16,7 @@ export interface DiversTarif extends Struct.ComponentSchema {
     displayName: 'tarif';
   };
   attributes: {
-    description: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
     prix: Schema.Attribute.String;
   };
 }
