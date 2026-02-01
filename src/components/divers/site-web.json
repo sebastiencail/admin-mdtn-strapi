@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_divers_site_webs",
+  "info": {
+    "displayName": "siteWeb"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "libelle": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

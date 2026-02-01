@@ -16,10 +16,12 @@
       "default": false
     },
     "nom": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "prenom": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "couleur": {
       "type": "enumeration",
@@ -59,7 +61,8 @@
       ]
     },
     "url": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "metaDescription": {
       "type": "string"
@@ -98,6 +101,11 @@
       "type": "component",
       "component": "divers.information",
       "repeatable": true
+    },
+    "siteWeb": {
+      "type": "component",
+      "component": "divers.site-web",
+      "repeatable": false
     }
   }
 }

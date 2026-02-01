@@ -509,19 +509,20 @@ export interface ApiTherapeuteTherapeute extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     mail: Schema.Attribute.Email;
     metaDescription: Schema.Attribute.String;
-    nom: Schema.Attribute.String;
+    nom: Schema.Attribute.String & Schema.Attribute.Required;
     photo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     portable: Schema.Attribute.String;
-    prenom: Schema.Attribute.String;
+    prenom: Schema.Attribute.String & Schema.Attribute.Required;
     presentation: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
+    siteWeb: Schema.Attribute.Component<'divers.site-web', false>;
     soins: Schema.Attribute.Component<'divers.information', true>;
     specialites: Schema.Attribute.String;
     tarifs: Schema.Attribute.Component<'divers.tarif', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    url: Schema.Attribute.String;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
